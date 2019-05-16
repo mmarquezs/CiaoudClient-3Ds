@@ -7,13 +7,12 @@ ENV DISPLAY="host.docker.internal:0"
 ENV UNAME="spacemacser"
 ENV UID="1000"
 
-#COPY .spacemacs "${UHOME}/.spacemacs"
-#COPY private "${UHOME}/.emacs.d/private"
+COPY .spacemacs "${UHOME}/.spacemacs"
+COPY private "${UHOME}/.emacs.d/private"
 
 RUN install-deps \
 && apt-get update && apt-get install \
     clang-3.7
 
 VOLUME ["/MNT/WORKSPACE"]
-VOLUME ["/home/emacs"]
 

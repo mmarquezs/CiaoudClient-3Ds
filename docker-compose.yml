@@ -4,12 +4,3 @@ services:
         build: ./spacemacs/
         volumes:
                 - ./:/mnt/workspace
-                  #- ./spacemacs/home/emacs:/home/emacs 
-
-                  
-                  #volumes:
-                  #        spacemacs_home:
-                  #                driver: local
-                  #                driver_opts:
-                  #                        type: none
-                  #                        device: $PWD\spacemacs\home\emacs\
