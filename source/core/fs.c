@@ -8,7 +8,16 @@
 #include "fs.h"
 #include "linkedlist.h"
 #include "stringutil.h"
-
+/**
+ * @brief      Returns if the path points to a directory
+ *
+ * @detail     Returns if the path points to a directory
+ *
+ * @param      archive Archive file
+ * @param      path Path to check if is a directory
+ *
+ * @return     boolean indicating if it's a directory
+ */
 bool fs_is_dir(FS_Archive archive, const char* path) {
     Result res = 0;
 
@@ -27,6 +36,17 @@ bool fs_is_dir(FS_Archive archive, const char* path) {
     return R_SUCCEEDED(res);
 }
 
+/**
+ * @brief      Ensures the provided path is or will be a directory
+ *
+ * @details    Checks that the path is a directory if it isn't it deletes the file and creates a directory
+ *
+ * @param      archive Archive file
+ *
+ * @param      path path to the directory
+ *
+ * @return     Result result of function, if it was succesfull obtaining a directory
+ */
 Result fs_ensure_dir(FS_Archive archive, const char* path) {
     Result res = 0;
 
@@ -48,11 +68,30 @@ Result fs_ensure_dir(FS_Archive archive, const char* path) {
     return res;
 }
 
+/**
+ * @brief      Given data it creates a FS_Path as a PATH_BINARY
+ *
+ * @details    Given data it creates a FS_Path as a PATH_BINARY
+ *
+ * @param      data, size - Where data is the binary path, and size the size of it.
+ *
+ * @return     FS_Path(PATH_BINARY)
+ */
 FS_Path fs_make_path_binary(const void* data, u32 size) {
     FS_Path path = {PATH_BINARY, size, data};
     return path;
 }
 
+
+/**
+ * @brief      Returns FS_Path in UTF16 from an UTF8 char path
+ *
+ * @details    Given an utf8 char array path
+ *
+ * @param      char* Utf8 path
+ *
+ * @return     FS_Path(PATH_UTF16)
+ */
 FS_Path* fs_make_path_utf8(const char* path) {
     size_t len = strlen(path);
 
@@ -76,6 +115,16 @@ FS_Path* fs_make_path_utf8(const char* path) {
     return fsPath;
 }
 
+
+/**
+ * @brief      Deallocates a path
+ *
+ * @details    Deallocates the path struct and the data element it's pointing to.
+ *
+ * @param      FS_Path
+ *
+ * @return     void
+ */
 void fs_free_path_utf8(FS_Path* path) {
     free((void*) path->data);
     free(path);
@@ -88,6 +137,15 @@ typedef struct {
 
 static linked_list opened_archives;
 
+/**
+ * @brief      Provided a FS_Archive 
+ *
+ * @details    detailed description
+ *
+ * @param      param
+ *
+ * @return     return type
+ */
 Result fs_open_archive(FS_Archive* archive, FS_ArchiveID id, FS_Path path) {
     if(archive == NULL) {
         return R_APP_INVALID_ARGUMENT;
