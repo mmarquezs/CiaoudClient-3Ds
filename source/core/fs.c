@@ -14,15 +14,18 @@
  * @detail     Returns if the path points to a directory
  *
  * @param      archive Archive file
- * @param      path Path to check if is a directory
+ * @param      path Pat, in utf8, to check if is a directory
  *
  * @return     boolean indicating if it's a directory
  */
 bool fs_is_dir(FS_Archive archive, const char* path) {
     Result res = 0;
 
+    #Obtains FS_Paths from a utf8 char array.
     FS_Path* fsPath = fs_make_path_utf8(path);
+
     if(fsPath != NULL) {
+      #Is a valid FS_Path so we try to open the path as a directory in the provided archive.
         Handle dirHandle = 0;
         if(R_SUCCEEDED(res = FSUSER_OpenDirectory(&dirHandle, archive, *fsPath))) {
             FSDIR_Close(dirHandle);
@@ -30,6 +33,7 @@ bool fs_is_dir(FS_Archive archive, const char* path) {
 
         fs_free_path_utf8(fsPath);
     } else {
+#If is null it failed to allocated memory so return out of memory error
         res = R_APP_OUT_OF_MEMORY;
     }
 
@@ -138,13 +142,15 @@ typedef struct {
 static linked_list opened_archives;
 
 /**
- * @brief      Provided a FS_Archive 
+ * @brief      Opens a FS_Archive.
  *
- * @details    detailed description
+ * @details    Opens a provided FS_Archive using it's ID (ARCHIVE_ROMFS,ARCHIVE_USER_SAVEDATA,...  )  and path.
  *
- * @param      param
+ * @param      archive to open
+ * @param      id of archive type
+ * @param      path of the archive
  *
- * @return     return type
+ * @return     Result
  */
 Result fs_open_archive(FS_Archive* archive, FS_ArchiveID id, FS_Path path) {
     if(archive == NULL) {
@@ -165,6 +171,15 @@ Result fs_open_archive(FS_Archive* archive, FS_ArchiveID id, FS_Path path) {
     return res;
 }
 
+/**
+ * @brief      Adds the reference of a FS_Archive to the opened_archives list
+ *
+ * @details    It adds the references to a FS_Archive to the opened_archives list, if the archive is already there it adds +1 to the refs to that archive. This is used to keep track of the opened archives and close them when they arent referenced anymore.
+ *
+ * @param      FS_Archive to add
+ *
+ * @return     Result
+ */
 Result fs_ref_archive(FS_Archive archive) {
     linked_list_iter iter;
     linked_list_iterate(&opened_archives, &iter);
