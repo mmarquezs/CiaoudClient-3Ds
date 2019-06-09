@@ -181,12 +181,15 @@ Result fs_open_archive(FS_Archive* archive, FS_ArchiveID id, FS_Path path) {
  * @return     Result
  */
 Result fs_ref_archive(FS_Archive archive) {
+# Gets an iterator from opened_archives list
     linked_list_iter iter;
     linked_list_iterate(&opened_archives, &iter);
 
+# Loops through the list, searching for the reference to the archive
     while(linked_list_iter_has_next(&iter)) {
         archive_ref* ref = (archive_ref*) linked_list_iter_next(&iter);
         if(ref->archive == archive) {
+          # Found a reference to the archive already in the list. Adds +1 to the references to that archive and exits.
             ref->refs++;
             return 0;
         }
@@ -194,6 +197,7 @@ Result fs_ref_archive(FS_Archive archive) {
 
     Result res = 0;
 
+# If there wasn't any reference to that file creates a new one and adds it to the opened_archives list.
     archive_ref* ref = (archive_ref*) calloc(1, sizeof(archive_ref));
     if(ref != NULL) {
         ref->archive = archive;
@@ -207,16 +211,31 @@ Result fs_ref_archive(FS_Archive archive) {
     return res;
 }
 
+
+/**
+ * @brief      Closes an FS_Archive
+ *
+ * @details    Given an FS_Archive it remove a references from the opened_archives and if it's the last reference to it, it closes the archive.
+ *
+ * @param      FS_Archive Archive to close.
+ *
+ * @return     Result of the action
+ */
 Result fs_close_archive(FS_Archive archive) {
+# Gets an iterator from opened_archives list
     linked_list_iter iter;
     linked_list_iterate(&opened_archives, &iter);
+
+# Loops through the list, searching for the reference to the archive
 
     while(linked_list_iter_has_next(&iter)) {
         archive_ref* ref = (archive_ref*) linked_list_iter_next(&iter);
         if(ref->archive == archive) {
+          # Found a reference to the archive already in the list. Adds -1 to the references to that archive.
             ref->refs--;
 
             if(ref->refs == 0) {
+              # If it's the last reference it removes the archive from the opened_archives list.
                 linked_list_iter_remove(&iter);
                 free(ref);
             } else {
@@ -260,6 +279,15 @@ int fs_make_smdh_path(char* out, const char* name, size_t size) {
     return snprintf(out, size, "/3ds/%s/%s.smdh", filename, filename);
 }
 
+/**
+ * @brief      Returns the title media destination (NAND Memory or SD)
+ *
+ * @details    Returns the media destination, NAND Memory or SD, based on the type of application that the title id indicates it is.
+ *
+ * @param      u64 Nintendo 3DS titleI
+ *
+ * @return     FS_Mediatype [MEDIATYPE_NAND or MEDIATYPE_SD]
+ */
 FS_MediaType fs_get_title_destination(u64 titleId) {
     u16 platform = (u16) ((titleId >> 48) & 0xFFFF);
     u16 category = (u16) ((titleId >> 32) & 0xFFFF);
