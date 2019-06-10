@@ -296,7 +296,7 @@ FS_MediaType fs_get_title_destination(u64 titleId) {
     //     DSiWare                3DS                    DSiWare, System, DLP         Application           System Title
     return platform == 0x0003 || (platform == 0x0004 && ((category & 0x8011) != 0 || (category == 0x0000 && variation == 0x02))) ? MEDIATYPE_NAND : MEDIATYPE_SD;
 }
-
+//TODO: Find how does the filtering work
 bool fs_filter_cias(void* data, const char* name, u32 attributes) {
     if(data != NULL) {
         fs_filter_data* filterData = (fs_filter_data*) data;
@@ -312,7 +312,7 @@ bool fs_filter_cias(void* data, const char* name, u32 attributes) {
     size_t len = strlen(name);
     return len >= 4 && strncasecmp(name + len - 4, ".cia", 4) == 0;
 }
-
+//TODO: Find how does the filtering work
 bool fs_filter_tickets(void* data, const char* name, u32 attributes) {
     if(data != NULL) {
         fs_filter_data* filterData = (fs_filter_data*) data;

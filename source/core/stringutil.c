@@ -20,17 +20,48 @@ bool string_is_empty(const char* str) {
 
     return true;
 }
-
+/**
+ * @brief      Copy n chars from source string to dest.
+ *
+ * @details    Copy n (size - 1) chars from source string to destination and appends a null char to the end.
+ *
+ * @param      dst - Destination
+ *
+ * @param      src - Source
+ *
+ *
+ * @param      size - n chars to copy + 1
+ *
+ * @return     return type
+ */
 void string_copy(char* dst, const char* src, size_t size) {
     if(size > 0) {
         strncpy(dst, src, size - 1);
         dst[size - 1] = '\0';
     }
 }
-
+/**
+ * @brief      Get the filename of a file (without extension)
+ *
+ * @details    Get the filename of a file (without extension)
+ *
+ * @param      char* out - Output
+ *
+ *
+ * @param      char* file - Full filename
+ *
+ *
+ * @param      u32 size - Full filename size
+ *
+ * @return     out - Filename without extension
+ */
 void string_get_file_name(char* out, const char* file, u32 size) {
+  # Get last char
     const char* end = file + strlen(file);
+  # Get pointer to the address before the first char.
     const char* curr = file - 1;
+
+    # Loop until the last dot character.
     while((curr = strchr(curr + 1, '.')) != NULL) {
         end = curr;
     }
