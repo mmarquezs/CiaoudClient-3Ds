@@ -31,6 +31,19 @@ struct httpc_context_s {
 
 typedef struct httpc_context_s* httpc_context;
 
+/**
+ * @brief      Generates the redirect url.
+ *
+ * @details    Generates the redirect url given the original url, the redirect and the redirect size.
+ *
+ * @param      char* oldUrl - Original Urlç
+ *
+ * @param      const char* redirectTo - Path to redirect to, it can be a relative path.
+ *
+ * @param      size_t size - Size of the redirecTo char array.
+ *
+ * @return     return type
+ */
 static void httpc_resolve_redirect(char* oldUrl, const char* redirectTo, size_t size) {
     if(size > 0) {
         if(redirectTo[0] == '/') {
