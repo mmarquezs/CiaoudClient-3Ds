@@ -26,7 +26,7 @@ struct httpc_context_s {
     bool compressed;
     z_stream inflate;
     u8 buffer[32 * 1024];
-    u32 bufferSize;
+  u32 bufferSize; //Refactor this to buffedFilledSize to reduce missunderstandings.
 };
 
 typedef struct httpc_context_s* httpc_context;
@@ -36,7 +36,7 @@ typedef struct httpc_context_s* httpc_context;
  *
  * @details    Generates the redirect url given the original url, the redirect and the redirect size.
  *
- * @param      char* oldUrl - Original Urlç
+ * @param      char* oldUrl - Original Url
  *
  * @param      const char* redirectTo - Path to redirect to, it can be a relative path.
  *
@@ -46,10 +46,12 @@ typedef struct httpc_context_s* httpc_context;
  */
 static void httpc_resolve_redirect(char* oldUrl, const char* redirectTo, size_t size) {
     if(size > 0) {
+      // Checking if it's a subpath by checking if the first char is an slash.
         if(redirectTo[0] == '/') {
             char* baseEnd = oldUrl;
 
-            // Find the third slash to find the end of the URL's base; e.g. https://www.example.com/
+            // Find the third slash to find the end of the URL's base; e.g.
+            // https://www.example.com/
             u32 slashCount = 0;
             while(*baseEnd != '\0' && (baseEnd = strchr(baseEnd + 1, '/')) != NULL) {
                 slashCount++;
@@ -58,28 +60,45 @@ static void httpc_resolve_redirect(char* oldUrl, const char* redirectTo, size_t 
                 }
             }
 
-            // If there are less than 3 slashes, assume the base URL ends at the end of the string; e.g. https://www.example.com
+            // If there are less than 3 slashes, assume the base URL ends at the
+            // end of the string; e.g. https://www.example.com
             if(slashCount != 3) {
                 baseEnd = oldUrl + strlen(oldUrl);
             }
 
+            // Gets the length of the base url.
             size_t baseLen = baseEnd - oldUrl;
+            // If there is space left appends the redirectTo at the end of the
+            // baseUrl.
             if(baseLen < size) {
                 string_copy(baseEnd, redirectTo, size - baseLen);
             }
         } else {
+          // It's a full url, we replace the oldUrl with the new redirect.
             string_copy(oldUrl, redirectTo, size);
         }
     }
 }
-
+/**
+ * @brief      Creates/Opens an http connection.
+ *
+ * @details    Create a http context, configures it and connects to the provided url.
+ *
+ * @param      context a pointer where to store the httpc_context
+ *
+ * @param      url Url to connect to.
+ *
+ * @param      userAgent Optional. UserAgent to use instead of the default one.
+ *
+ * @return     Result result of the operation (R_FAILED, R_SUCCEEDED, R_APP_INVALID_ARGUMENT, R_APP_HTTP_ERROR_BASE,...)
+ */
 static Result httpc_open(httpc_context* context, const char* url, bool userAgent) {
     if(url == NULL) {
         return R_APP_INVALID_ARGUMENT;
     }
 
     Result res = 0;
-
+    // Initalizate the httpc_context
     httpc_context ctx = (httpc_context) calloc(1, sizeof(struct httpc_context_s));
     if(ctx != NULL) {
         char currUrl[1024];
@@ -87,29 +106,43 @@ static Result httpc_open(httpc_context* context, const char* url, bool userAgent
 
         bool resolved = false;
         u32 redirectCount = 0;
+        // Starting the connection, limited to HTTP_MAX_REDIRECTS.
         while(R_SUCCEEDED(res) && !resolved && redirectCount < HTTP_MAX_REDIRECTS) {
+          // Opening the httpc_context with the provided url..
             if(R_SUCCEEDED(res = httpcOpenContext(&ctx->httpc, HTTPC_METHOD_GET, currUrl, 1))) {
                 u32 response = 0;
+                // Disabling SSL certificate verification, setting the headers,
+                // including the User-Agent,the time to keep alive and
+                // initalizating the connection.
                 if(R_SUCCEEDED(res = httpcSetSSLOpt(&ctx->httpc, SSLCOPT_DisableVerify))
                    && (!userAgent || R_SUCCEEDED(res = httpcAddRequestHeaderField(&ctx->httpc, "User-Agent", HTTP_USER_AGENT)))
                    && R_SUCCEEDED(res = httpcAddRequestHeaderField(&ctx->httpc, "Accept-Encoding", "gzip, deflate"))
                    && R_SUCCEEDED(res = httpcSetKeepAlive(&ctx->httpc, HTTPC_KEEPALIVE_ENABLED))
                    && R_SUCCEEDED(res = httpcBeginRequest(&ctx->httpc))
                    && R_SUCCEEDED(res = httpcGetResponseStatusCodeTimeout(&ctx->httpc, &response, HTTP_TIMEOUT_NS))) {
+                  // There is a redirect to make.
                     if(response == 301 || response == 302 || response == 303) {
                         redirectCount++;
 
                         char redirectTo[1024];
                         memset(redirectTo, '\0', sizeof(redirectTo));
+
+                        // Getting the redirect location from the header
+                        // "Location", closing the context, and setting the new
+                        // url as destination with the httpc_resolve_redirect
+                        // function. The next loop it will try this url.
                         if(R_SUCCEEDED(res = httpcGetResponseHeader(&ctx->httpc, "Location", redirectTo, sizeof(redirectTo)))) {
                             httpcCloseContext(&ctx->httpc);
 
                             httpc_resolve_redirect(currUrl, redirectTo, sizeof(currUrl));
                         }
                     } else {
+                      // Resolved without any redirection.
                         resolved = true;
 
                         if(response == 200) {
+                          // Status OK. We check to see if it's compressed.If so
+                          // we decompressed/inflated.
                             char encoding[32];
                             if(R_SUCCEEDED(httpcGetResponseHeader(&ctx->httpc, "Content-Encoding", encoding, sizeof(encoding)))) {
                                 bool gzip = strncmp(encoding, "gzip", sizeof(encoding)) == 0;
@@ -127,6 +160,7 @@ static Result httpc_open(httpc_context* context, const char* url, bool userAgent
                                 }
                             }
                         } else {
+                          // Status NO OK. (403, 404, 500,etc.)
                             res = R_APP_HTTP_ERROR_BASE + response;
                         }
                     }
@@ -137,7 +171,7 @@ static Result httpc_open(httpc_context* context, const char* url, bool userAgent
                 }
             }
         }
-
+        // FIXME: It should be redirectCount > HTTP_MAX_REDIRECTS
         if(R_SUCCEEDED(res) && redirectCount >= 32) {
             res = R_APP_HTTP_TOO_MANY_REDIRECTS;
         }
@@ -155,12 +189,20 @@ static Result httpc_open(httpc_context* context, const char* url, bool userAgent
 
     return res;
 }
-
+/**
+ * @brief      Closes httpc_context
+ *
+ * @details    Closes httpc_context
+ *
+ * @param      context httpc_context
+ *
+ * @return     Result result of the action
+ */
 static Result httpc_close(httpc_context context) {
     if(context == NULL) {
         return R_APP_INVALID_ARGUMENT;
     }
-
+    // Freeing the decompression stream state
     if(context->compressed) {
         inflateEnd(&context->inflate);
     }
@@ -169,7 +211,15 @@ static Result httpc_close(httpc_context context) {
     free(context);
     return res;
 }
-
+/**
+ * @brief      Returns the download size
+ *
+ * @details    Returns the download size. (Not the downloaded, the full content size)
+ *
+ * @param      context - httpc_context
+ *
+ * @return     Result - result of the operation.
+ */
 static Result httpc_get_size(httpc_context context, u32* size) {
     if(context == NULL || size == NULL) {
         return R_APP_INVALID_ARGUMENT;
@@ -191,22 +241,41 @@ static Result httpc_read(httpc_context context, u32* bytesRead, void* buffer, u3
 
         u32 outPos = 0;
         if(context->compressed) {
+          // FIXME: It seems the intention was to download data after a
+          // partially emptied buffer (due to partial inflate), that can be seen
+          // in the receivedatatimeout calculating the buffer pointer but there
+          // is a check of bufferSize > 0 but prevents this of happening.
             u32 lastPos = context->bufferSize;
             while(res == HTTPC_RESULTCODE_DOWNLOADPENDING && outPos < size) {
                 if((context->bufferSize > 0
+                    // If buffersize is 0 then we downlod data from the http
+                    // context. FIXME: This command is pointing to the memory
+                    // after the data already in the buffer using the
+                    // buffersize. This is pointless here cause it will always
+                    // be 0. Plus the size is also calculated with the size of
+                    // the buffer minus the buffersize, btw bufferSize is actually the
+                    // bufferFilledSize, the size of the filled part of the
+                    // buffer.
                     || R_SUCCEEDED(res = httpcReceiveDataTimeout(&context->httpc, &context->buffer[context->bufferSize], sizeof(context->buffer) - context->bufferSize, HTTP_TIMEOUT_NS))
                     || res == HTTPC_RESULTCODE_DOWNLOADPENDING)) {
                     Result posRes = 0;
                     u32 currPos = 0;
                     if(R_SUCCEEDED(posRes = httpcGetDownloadSizeState(&context->httpc, &currPos, NULL))) {
+                      // We calculate the new buffersize based on the current downloaded size and the last buffersize(lastPos)
                         context->bufferSize += currPos - lastPos;
-
+                        // We setup ZLib
+                        // First we setup the context buffer as input
                         context->inflate.next_in = context->buffer;
+                        // We setup the provided buffer as the output (plus outPos to append at the end if we added previous data)
                         context->inflate.next_out = buffer + outPos;
+                        // We set the bytes available with the buffersize.
                         context->inflate.avail_in = context->bufferSize;
+                        // We set the bytes available to output with the size provided (minus outPos to check the remaining space).
                         context->inflate.avail_out = size - outPos;
+                        // We decompress/inflate the data using the Sync Flush implementation.
                         inflate(&context->inflate, Z_SYNC_FLUSH);
-
+                        // After the inflate avail_in can be 0 (if it finished) or >0 which means we have to continue inflating.
+                        // We copy the leftovers (not inflated) of context->buffer to itself.
                         memcpy(context->buffer, context->buffer + (context->bufferSize - context->inflate.avail_in), context->inflate.avail_in);
                         context->bufferSize = context->inflate.avail_in;
 

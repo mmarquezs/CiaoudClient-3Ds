@@ -21,11 +21,11 @@
 bool fs_is_dir(FS_Archive archive, const char* path) {
     Result res = 0;
 
-    #Obtains FS_Paths from a utf8 char array.
+    // Obtains FS_Paths from a utf8 char array.
     FS_Path* fsPath = fs_make_path_utf8(path);
 
     if(fsPath != NULL) {
-      #Is a valid FS_Path so we try to open the path as a directory in the provided archive.
+      // Is a valid FS_Path so we try to open the path as a directory in the provided archive.
         Handle dirHandle = 0;
         if(R_SUCCEEDED(res = FSUSER_OpenDirectory(&dirHandle, archive, *fsPath))) {
             FSDIR_Close(dirHandle);
@@ -181,11 +181,11 @@ Result fs_open_archive(FS_Archive* archive, FS_ArchiveID id, FS_Path path) {
  * @return     Result
  */
 Result fs_ref_archive(FS_Archive archive) {
-# Gets an iterator from opened_archives list
+  // Gets an iterator from opened_archives list
     linked_list_iter iter;
     linked_list_iterate(&opened_archives, &iter);
 
-# Loops through the list, searching for the reference to the archive
+    // Loops through the list, searching for the reference to the archive
     while(linked_list_iter_has_next(&iter)) {
         archive_ref* ref = (archive_ref*) linked_list_iter_next(&iter);
         if(ref->archive == archive) {
@@ -197,7 +197,7 @@ Result fs_ref_archive(FS_Archive archive) {
 
     Result res = 0;
 
-# If there wasn't any reference to that file creates a new one and adds it to the opened_archives list.
+    // If there wasn't any reference to that file creates a new one and adds it to the opened_archives list.
     archive_ref* ref = (archive_ref*) calloc(1, sizeof(archive_ref));
     if(ref != NULL) {
         ref->archive = archive;
@@ -222,20 +222,20 @@ Result fs_ref_archive(FS_Archive archive) {
  * @return     Result of the action
  */
 Result fs_close_archive(FS_Archive archive) {
-# Gets an iterator from opened_archives list
+  // Gets an iterator from opened_archives list
     linked_list_iter iter;
     linked_list_iterate(&opened_archives, &iter);
 
-# Loops through the list, searching for the reference to the archive
+    // Loops through the list, searching for the reference to the archive
 
     while(linked_list_iter_has_next(&iter)) {
         archive_ref* ref = (archive_ref*) linked_list_iter_next(&iter);
         if(ref->archive == archive) {
-          # Found a reference to the archive already in the list. Adds -1 to the references to that archive.
+          // Found a reference to the archive already in the list. Adds -1 to the references to that archive.
             ref->refs--;
 
             if(ref->refs == 0) {
-              # If it's the last reference it removes the archive from the opened_archives list.
+              // If it's the last reference it removes the archive from the opened_archives list.
                 linked_list_iter_remove(&iter);
                 free(ref);
             } else {
