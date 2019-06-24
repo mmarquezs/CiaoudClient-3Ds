@@ -237,6 +237,7 @@ static Result httpc_read(httpc_context context, u32* bytesRead, void* buffer, u3
 
     u32 startPos = 0;
     if(R_SUCCEEDED(res = httpcGetDownloadSizeState(&context->httpc, &startPos, NULL))) {
+      // We download compressed data.
         res = HTTPC_RESULTCODE_DOWNLOADPENDING;
 
         u32 outPos = 0;
@@ -244,7 +245,7 @@ static Result httpc_read(httpc_context context, u32* bytesRead, void* buffer, u3
           // FIXME: It seems the intention was to download data after a
           // partially emptied buffer (due to partial inflate), that can be seen
           // in the receivedatatimeout calculating the buffer pointer but there
-          // is a check of bufferSize > 0 but prevents this of happening.
+          // is a check of bufferSize > 0 that prevents this of happening. This is related with the next 
             u32 lastPos = context->bufferSize;
             while(res == HTTPC_RESULTCODE_DOWNLOADPENDING && outPos < size) {
                 if((context->bufferSize > 0
@@ -287,6 +288,7 @@ static Result httpc_read(httpc_context context, u32* bytesRead, void* buffer, u3
                 }
             }
         } else {
+          // We download not compressed data.
             while(res == HTTPC_RESULTCODE_DOWNLOADPENDING && outPos < size) {
                 if(R_SUCCEEDED(res = httpcReceiveDataTimeout(&context->httpc, &((u8*) buffer)[outPos], size - outPos, HTTP_TIMEOUT_NS)) || res == HTTPC_RESULTCODE_DOWNLOADPENDING) {
                     Result posRes = 0;
