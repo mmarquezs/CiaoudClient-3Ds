@@ -12,7 +12,7 @@ COPY private "${UHOME}/.emacs.d/private"
 
 RUN install-deps \
 && apt-get update && apt-get install \
-    clang-3.7 global
+    clang global
 
 VOLUME ["/MNT/WORKSPACE"]
 
