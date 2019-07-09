@@ -1,4 +1,4 @@
-udo: false
+sudo: false
 
 branches:
   only:
@@ -10,7 +10,7 @@ addons:
       - doxygen
 
 script:
-  - doxygen Doxyfile
+  - doxygen DOXYFILE 
 
 deploy:
   provider: pages
