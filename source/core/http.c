@@ -228,6 +228,18 @@ static Result httpc_get_size(httpc_context context, u32* size) {
     return httpcGetDownloadSizeState(&context->httpc, NULL, size);
 }
 
+/**
+ * @brief      Read the data downloaded
+ *
+ * @details    Reads n bytes from the connection and saves them to buffer of the specified size.
+ *
+ * @param      context httpc_context
+ * @param      bytesRead The bytes to read
+ * @param      buffer The buffer where to store the data
+ * @param      size The size of the destination buffer.
+ *
+ * @return     return type
+ */
 static Result httpc_read(httpc_context context, u32* bytesRead, void* buffer, u32 size) {
     if(context == NULL || buffer == NULL) {
         return R_APP_INVALID_ARGUMENT;
@@ -328,28 +340,44 @@ typedef struct {
 
     Result res;
 } http_curl_data;
-
+/**
+ * @brief      Function that writes the data from curl and executes a callback.
+ *
+ * @details    This function write the data received by curl to the provided destination and at the end it calls the callback
+ *
+ * @param      *ptr Pointer to the destination to copy the data
+  * @param      size_t Size of each element on destination.
+ * @param      nmemb Number of elements, each one with size of size.
+ * @param      *userdata Stream of downloaded data.
+ *
+ * @return     size_t Size of the returned buffer.
+ */
 static size_t http_curl_write_callback(char* ptr, size_t size, size_t nmemb, void* userdata) {
     http_curl_data* curlData = (http_curl_data*) userdata;
-
+    // We set the start position to 0
     size_t srcPos = 0;
+    // We calculate the available memory. N elements of X size.
     size_t available = size * nmemb;
     while(R_SUCCEEDED(curlData->res) && available > 0) {
+        // We calculate the remaining data to copy from userdata.
         size_t remaining = curlData->bufferSize - curlData->pos;
+        // We calculate the data to copy, if it fits on destination we copy all
+        // the remaining data otherwise only the data that fits.
         size_t copySize = available < remaining ? available : remaining;
-
+        // We copy the data and move the cursors position.
         memcpy((u8*) curlData->buf + curlData->pos, ptr + srcPos, copySize);
         curlData->pos += copySize;
 
         srcPos += copySize;
         available -= copySize;
 
+        // We arrived at the end. We execute the callback and we reset the cursor position to 0.
         if(curlData->pos == curlData->bufferSize) {
             curlData->res = curlData->callback(curlData->userData, curlData->buf, curlData->bufferSize);
             curlData->pos = 0;
         }
     }
-
+    // If it succeded we return the size of the filled buffer otherwise return 0.
     return R_SUCCEEDED(curlData->res) ? size * nmemb : 0;
 }
 
