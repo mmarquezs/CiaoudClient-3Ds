@@ -381,13 +381,31 @@ static size_t http_curl_write_callback(char* ptr, size_t size, size_t nmemb, voi
     return R_SUCCEEDED(curlData->res) ? size * nmemb : 0;
 }
 
+/**
+ * @brief      Returns download info. Total size and downloded.
+ *
+ * @details    Returns the download total and the amount downloaded so far. Altought it's required in the parameters it doesn't return the uploaded amount.
+ *
+ * @param      clientp - Pointer to a curl client / http_curl_data.
+ *
+ * @param      dltotal - Output of the total amount to download.
+ *
+ * @param      dlnow - Output of the amount downloaded up to this point.
+ *
+ * @param      uptotal - Output of the total amount to upload. NOT USED
+ *
+ * @param      upnow - Output of the amount uploaded up to this point.
+ *
+ * @return     int - 1 if failed and 0 if succesfully.
+ */
 int http_curl_xfer_info_callback(void* clientp, curl_off_t dltotal, curl_off_t dlnow, curl_off_t ultotal, curl_off_t ulnow) {
     http_curl_data* curlData = (http_curl_data*) clientp;
-
+    // If it failed or the checkRunning callback is set  and its not running.
     if(R_FAILED(curlData->res) || (curlData->checkRunning != NULL && R_FAILED(curlData->res = curlData->checkRunning(curlData->userData)))) {
         return 1;
     }
 
+    // If progress is not null, return the progress (only download info)
     if(curlData->progress != NULL) {
         curlData->progress(curlData->userData, (u64) dltotal, (u64) dlnow);
     }
@@ -395,6 +413,28 @@ int http_curl_xfer_info_callback(void* clientp, curl_off_t dltotal, curl_off_t d
     return 0;
 }
 
+/**
+ * @brief      Http Download Callback - Callback for curl download.
+ *
+ * @details It downloads the provided url up the provided buffersize and updates
+ * the calls the callback for saving the data, the checkRunning provided
+ * function and updates progress.
+ *
+ * @param      char* url - The url to download.
+ *
+ * @param      u32 bufferSize - The size of the buffer destination in the userData.
+ *
+ * @param      void* userData - A pointer to an userData struct where the data will be saved, this includes the buffer, progress,etc..
+ *
+ * @param      char* url - The url to download.
+ *
+ * @param      char* url - The url to download.
+ *
+ * @param      char* url - The url to download.
+ *
+ *
+ * @return     return type
+ */
 Result http_download_callback(const char* url, u32 bufferSize, void* userData, Result (*callback)(void* userData, void* buffer, size_t size),
                                                                                Result (*checkRunning)(void* userData),
                                                                                Result (*progress)(void* userData, u64 total, u64 curr)) {
@@ -428,6 +468,7 @@ Result http_download_callback(const char* url, u32 bufferSize, void* userData, R
                     res = closeRes;
                 }
             }
+            // If we failed to establish an https connection due to failed verification we switch to using curl for downloading.
         } else if(res == R_HTTP_TLS_VERIFY_FAILED) {
             res = 0;
 
