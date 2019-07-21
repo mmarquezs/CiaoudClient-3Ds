@@ -452,6 +452,9 @@ Result http_download_callback(const char* url, u32 bufferSize, void* userData, R
 
                 u32 total = 0;
                 u32 currSize = 0;
+                // Main download While running, it keeps reading the data from
+                // the httpc context, passing it to the callback and updating
+                // the progress.
                 while(total < dlSize
                       && (checkRunning == NULL || R_SUCCEEDED(res = checkRunning(userData)))
                       && R_SUCCEEDED(res = httpc_read(context, &currSize, buf, bufferSize))
@@ -463,15 +466,17 @@ Result http_download_callback(const char* url, u32 bufferSize, void* userData, R
                     total += currSize;
                 }
 
+                // Download finished, closing connection.
                 Result closeRes = httpc_close(context);
                 if(R_SUCCEEDED(res)) {
                     res = closeRes;
                 }
             }
-            // If we failed to establish an https connection due to failed verification we switch to using curl for downloading.
-        } else if(res == R_HTTP_TLS_VERIFY_FAILED) {
+            // If it fails to establish an https connection due to failed verification it switches to using curl for downloading.
+         else if(res == R_HTTP_TLS_VERIFY_FAILED) {
             res = 0;
 
+            // Setting up CURL with all the required paramters, buffer, callbacks,etc.
             CURL* curl = curl_easy_init();
             if(curl != NULL) {
                 http_curl_data curlData = {bufferSize, userData, callback, checkRunning, progress, buf, 0, 0};
@@ -492,8 +497,12 @@ Result http_download_callback(const char* url, u32 bufferSize, void* userData, R
                 curl_easy_setopt(curl, CURLOPT_XFERINFOFUNCTION, http_curl_xfer_info_callback);
                 curl_easy_setopt(curl, CURLOPT_XFERINFODATA, (void*) &curlData);
 
+                // Curl is setup. We perform a blocking transfer.
                 CURLcode ret = curl_easy_perform(curl);
 
+                // Checking of the transfer finished OK, and if curlData holds
+                // data (pos != 0) it calls the provided callback to save the
+                // data.
                 if(ret == CURLE_OK && curlData.pos != 0) {
                     curlData.res = curlData.callback(curlData.userData, curlData.buf, curlData.pos);
                     curlData.pos = 0;
@@ -501,6 +510,7 @@ Result http_download_callback(const char* url, u32 bufferSize, void* userData, R
 
                 res = curlData.res;
 
+                // Checking if it finished succesfully, if not report the responsecode reported.
                 if(R_SUCCEEDED(res) && ret != CURLE_OK) {
                     if(ret == CURLE_HTTP_RETURNED_ERROR) {
                         long responseCode = 0;
