@@ -1,0 +1,9 @@
+digraph "buildtools/3ds" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_569de109683233de5eafd8b51de37f1d {
+    graph [ bgcolor="#ddddee", pencolor="black", label="buildtools" fontname="Helvetica", fontsize="10", URL="dir_569de109683233de5eafd8b51de37f1d.html"]
+  dir_aeaca7a8ee88eda37b2f6dc63d48021d [shape=box, label="3ds", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_aeaca7a8ee88eda37b2f6dc63d48021d.html"];
+  }
+}

@@ -1,0 +1,9 @@
+digraph "source/libs/quirc" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_92ebb7056a61401c2233bc0a14e997d2 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="libs" fontname="Helvetica", fontsize="10", URL="dir_92ebb7056a61401c2233bc0a14e997d2.html"]
+  dir_91bb16ed87e3403a3814cbb8a78fb218 [shape=box, label="quirc", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_91bb16ed87e3403a3814cbb8a78fb218.html"];
+  }
+}

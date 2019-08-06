@@ -1,0 +1,9 @@
+digraph "source/core/task" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_0d27ce74e9bd514c31e1d63efab6b388 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="core" fontname="Helvetica", fontsize="10", URL="dir_0d27ce74e9bd514c31e1d63efab6b388.html"]
+  dir_599ef71de65ee16ae01e5478c4eaaabf [shape=box, label="task", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_599ef71de65ee16ae01e5478c4eaaabf.html"];
+  }
+}

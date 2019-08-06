@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['accepted_5fextension',['accepted_extension',['../namespaceservefiles.html#a079aef8faceaf2c959f67b962e07c4bd',1,'servefiles']]],
+  ['active',['active',['../structui__view__s.html#a4592493b0f630107f8e90b239113c0a7',1,'ui_view_s']]],
+  ['align',['align',['../structquirc__grid.html#aafee318addfafc577d3fdbff737fd933',1,'quirc_grid']]],
+  ['align_5fregion',['align_region',['../structquirc__grid.html#a59c15b3583cee5846b57535e893c426b',1,'quirc_grid']]],
+  ['all',['all',['../structdelete__pending__titles__data.html#ab36bb98feb15de2d213bf2ad77365c03',1,'delete_pending_titles_data']]],
+  ['allocated',['allocated',['../screen_8c.html#a1bdc374dc38908c70ed24a978ecfd22e',1,'screen.c']]],
+  ['animated',['animated',['../structBNR__s.html#a046b74f5d647fcee4d40d80276a28a40',1,'BNR_s']]],
+  ['animatedframebitmaps',['animatedFrameBitmaps',['../structBNR__s.html#a5b02d04e265ee0aa5569e649f216698f',1,'BNR_s']]],
+  ['animatedframepalettes',['animatedFramePalettes',['../structBNR__s.html#a7d009273efb263350d0a25d997dc69e2',1,'BNR_s']]],
+  ['animationsequence',['animationSequence',['../structBNR__s.html#ad5bfd11cd1df78d4f23eea4089a57b61',1,'BNR_s']]],
+  ['apat',['apat',['../structquirc__version__info.html#a61ac59fc5048ab3667366d2ba59e3ea9',1,'quirc_version_info']]],
+  ['archive',['archive',['../structarchive__ref.html#a5755cf37b9705688255ce419760f62a5',1,'archive_ref::archive()'],['../structfiles__data.html#acee1d3c8c92dcab3db6bf6e874fd0e51',1,'files_data::archive()'],['../structfile__info__s.html#a4b2657cff77977bb7e2abb819cff5c01',1,'file_info_s::archive()'],['../structpopulate__files__data__s.html#aff021140404e49d6ea89040c26755017',1,'populate_files_data_s::archive()']]],
+  ['archiveid',['archiveId',['../structfiles__data.html#ab87127a9c7dadd4115addde5f489f528',1,'files_data']]],
+  ['archivepath',['archivePath',['../structfiles__data.html#acacac39990c31dda8598e464996e107b',1,'files_data']]],
+  ['attributes',['attributes',['../structfile__info__s.html#af0d75118356bbd3b52885e4b8e0b912d',1,'file_info_s']]],
+  ['author',['author',['../namespacesetup.html#ac83393287a89728d636e4ae9f4ac914f',1,'setup']]],
+  ['author_5femail',['author_email',['../namespacesetup.html#aa144ac52ed417d5c65d7377e0e75673e',1,'setup']]]
+];

@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['h',['h',['../structquirc.html#a75024fd99f7ae9015d3d812d9525ca8b',1,'quirc']]],
+  ['hasmeta',['hasMeta',['../structext__save__data__info__s.html#a8ff7df59bd78ad9c8ab8e9986c2304c2',1,'ext_save_data_info_s::hasMeta()'],['../structcia__info__s.html#ac71b1e7c3545f3e6386f9ced3f907192',1,'cia_info_s::hasMeta()'],['../structtitle__info__s.html#ab2592e87b00e8601d19cc399c83d77ce',1,'title_info_s::hasMeta()']]],
+  ['height',['height',['../structcapture__cam__data__s.html#a17f2e903f8f711d83ddd809f3c9715dc',1,'capture_cam_data_s::height()'],['../screen_8c.html#add40f8a56ae8cc650f92a3aa4d2bac99',1,'height():&#160;screen.c']]],
+  ['hint',['hint',['../structkbd__data.html#aaf6667b52a4b44d04145b62f16773beb',1,'kbd_data']]],
+  ['hostip',['hostIp',['../namespaceservefiles.html#ae281b8eb6d926302e02c17020db4b0bc',1,'servefiles']]],
+  ['hostport',['hostPort',['../namespaceservefiles.html#a4dcf6af5ce21c9ef63701d5ed0734571',1,'servefiles']]],
+  ['hscan',['hscan',['../structquirc__grid.html#a46325a63ac92eeea5d266b416a491f85',1,'quirc_grid']]],
+  ['http_2ec',['http.c',['../http_8c.html',1,'']]],
+  ['http_2eh',['http.h',['../http_8h.html',1,'']]],
+  ['http_5fcurl_5fdata',['http_curl_data',['../structhttp__curl__data.html',1,'']]],
+  ['http_5fcurl_5fxfer_5finfo_5fcallback',['http_curl_xfer_info_callback',['../http_8c.html#a9ab6aba9599c09b514ecef8a153febf7',1,'http.c']]],
+  ['http_5fdownload_5fbuffer',['http_download_buffer',['../http_8h.html#acf0395ac81f68ae3fd7fafcd615fbe5e',1,'http.h']]],
+  ['http_5fdownload_5fcallback',['http_download_callback',['../http_8c.html#ad91c60f5620d715cda079daf45ac2f76',1,'http_download_callback(const char *url, u32 bufferSize, void *userData, Result(*callback)(void *userData, void *buffer, size_t size), Result(*checkRunning)(void *userData), Result(*progress)(void *userData, u64 total, u64 curr)):&#160;http.c'],['../http_8h.html#ad91c60f5620d715cda079daf45ac2f76',1,'http_download_callback(const char *url, u32 bufferSize, void *userData, Result(*callback)(void *userData, void *buffer, size_t size), Result(*checkRunning)(void *userData), Result(*progress)(void *userData, u64 total, u64 curr)):&#160;http.c']]],
+  ['http_5fdownload_5fjson',['http_download_json',['../http_8h.html#a2b1a3530357a0119c75280943f0c3f28',1,'http.h']]],
+  ['http_5fdownload_5fseed',['http_download_seed',['../http_8h.html#a8a11107384537987742fff1b613de9b5',1,'http.h']]],
+  ['http_5fmax_5fredirects',['HTTP_MAX_REDIRECTS',['../http_8c.html#a215e8aa2adb3a73c7beecb844d5c8bcc',1,'http.c']]],
+  ['http_5ftimeout_5fns',['HTTP_TIMEOUT_NS',['../http_8c.html#ab401c2f26872f981bda39c7f46e6c86b',1,'http.c']]],
+  ['http_5ftimeout_5fsec',['HTTP_TIMEOUT_SEC',['../http_8c.html#acfc6c1ddecc516b7075c03f945c5cee9',1,'http.c']]],
+  ['http_5fuser_5fagent',['HTTP_USER_AGENT',['../http_8c.html#aa0d0d6dc4924eb0e3d3cf1e2e21917f5',1,'http.c']]],
+  ['httpc',['httpc',['../structhttpc__context__s.html#a60fb7ddb94336208ef71d9a876718c0d',1,'httpc_context_s']]],
+  ['httpc_5fcontext',['httpc_context',['../http_8c.html#a5d50ac00c5d9913859e1608e5cc3b0f3',1,'http.c']]],
+  ['httpc_5fcontext_5fs',['httpc_context_s',['../structhttpc__context__s.html',1,'']]]
+];

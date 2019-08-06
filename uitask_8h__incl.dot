@@ -1,0 +1,18 @@
+digraph "source/fbi/task/uitask.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="source/fbi/task/uitask.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="listextsavedata.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$listextsavedata_8h.html"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="listpendingtitles.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$listpendingtitles_8h.html"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="listsystemsavedata.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$listsystemsavedata_8h.html"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="listtickets.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$listtickets_8h.html"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="listtitles.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$listtitles_8h.html"];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="listfiles.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$listfiles_8h.html"];
+}

@@ -1,0 +1,9 @@
+digraph "source/libs/stb_image" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_92ebb7056a61401c2233bc0a14e997d2 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="libs" fontname="Helvetica", fontsize="10", URL="dir_92ebb7056a61401c2233bc0a14e997d2.html"]
+  dir_d84c5502d7258dee686b53fa04b4908b [shape=box, label="stb_image", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_d84c5502d7258dee686b53fa04b4908b.html"];
+  }
+}

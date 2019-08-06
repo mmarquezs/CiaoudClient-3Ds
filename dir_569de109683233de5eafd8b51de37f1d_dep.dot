@@ -1,0 +1,10 @@
+digraph "buildtools" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_569de109683233de5eafd8b51de37f1d {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_569de109683233de5eafd8b51de37f1d.html"];
+    dir_569de109683233de5eafd8b51de37f1d [shape=plaintext label="buildtools"];
+    dir_aeaca7a8ee88eda37b2f6dc63d48021d [shape=box label="3ds" color="black" fillcolor="white" style="filled" URL="dir_aeaca7a8ee88eda37b2f6dc63d48021d.html"];
+  }
+}

@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['r_5fapp_5fbad_5fdata',['R_APP_BAD_DATA',['../error_8h.html#a7b109be2dd992c3f151b9722588e0dbc',1,'error.h']]],
+  ['r_5fapp_5fcancelled',['R_APP_CANCELLED',['../error_8h.html#a95e970686429a09fceec86420871cae4',1,'error.h']]],
+  ['r_5fapp_5fcurl_5ferror_5fbase',['R_APP_CURL_ERROR_BASE',['../error_8h.html#aba55eb58d725d0a0ddfa2a793f75e27c',1,'error.h']]],
+  ['r_5fapp_5fcurl_5ferror_5fend',['R_APP_CURL_ERROR_END',['../error_8h.html#a91afc46a3332613b4653ff5b4eef7dca',1,'error.h']]],
+  ['r_5fapp_5fcurl_5finit_5ffailed',['R_APP_CURL_INIT_FAILED',['../error_8h.html#a573be6c97708ef2d43421890c520e9e3',1,'error.h']]],
+  ['r_5fapp_5fhttp_5ferror_5fbase',['R_APP_HTTP_ERROR_BASE',['../error_8h.html#a797723fa26fc2f0f1b7195f2328af6e8',1,'error.h']]],
+  ['r_5fapp_5fhttp_5ferror_5fend',['R_APP_HTTP_ERROR_END',['../error_8h.html#abc0ccedaa23f236cc066d6eac748d342',1,'error.h']]],
+  ['r_5fapp_5fhttp_5ftoo_5fmany_5fredirects',['R_APP_HTTP_TOO_MANY_REDIRECTS',['../error_8h.html#aa5d21129c3c0b4f1c8ec8ceffff24e14',1,'error.h']]],
+  ['r_5fapp_5finvalid_5fargument',['R_APP_INVALID_ARGUMENT',['../error_8h.html#a5f3214303887a05ba0e24c34c60016ac',1,'error.h']]],
+  ['r_5fapp_5fnot_5fimplemented',['R_APP_NOT_IMPLEMENTED',['../error_8h.html#a2171bbbab8ae7e40e87d7d527f88acc3',1,'error.h']]],
+  ['r_5fapp_5fout_5fof_5fmemory',['R_APP_OUT_OF_MEMORY',['../error_8h.html#aa927f2cd17bec1d0ed22cd67acc63748',1,'error.h']]],
+  ['r_5fapp_5fout_5fof_5frange',['R_APP_OUT_OF_RANGE',['../error_8h.html#a7b2e3022329c4463b3303714a86292a0',1,'error.h']]],
+  ['r_5fapp_5fparse_5ffailed',['R_APP_PARSE_FAILED',['../error_8h.html#a668059c22d444d2f08ede26bf9dea6a1',1,'error.h']]],
+  ['r_5fapp_5fskipped',['R_APP_SKIPPED',['../error_8h.html#ace1f2485ae51050866bc417043adba79',1,'error.h']]],
+  ['r_5fapp_5fthread_5fcreate_5ffailed',['R_APP_THREAD_CREATE_FAILED',['../error_8h.html#a583e27fb7d5163694e5f4dd49006e7ed',1,'error.h']]],
+  ['r_5fhttp_5ftls_5fverify_5ffailed',['R_HTTP_TLS_VERIFY_FAILED',['../http_8c.html#aa3060c9b777cedac6b1953b82fb3a3ea',1,'http.c']]]
+];

@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['ui_2ec',['ui.c',['../ui_8c.html',1,'']]],
+  ['ui_2eh',['ui.h',['../ui_8h.html',1,'']]],
+  ['ui_5fcreate',['ui_create',['../ui_8c.html#a81312dcf0918099f60a226c32c430231',1,'ui_create():&#160;ui.c'],['../ui_8h.html#a81312dcf0918099f60a226c32c430231',1,'ui_create():&#160;ui.c']]],
+  ['ui_5fdestroy',['ui_destroy',['../ui_8c.html#aebfc301bc43bda15b396d7be495fb230',1,'ui_destroy(ui_view *view):&#160;ui.c'],['../ui_8h.html#aebfc301bc43bda15b396d7be495fb230',1,'ui_destroy(ui_view *view):&#160;ui.c']]],
+  ['ui_5fexit',['ui_exit',['../ui_8c.html#a7b0fe86532accba15417fbbbf50ba74e',1,'ui_exit():&#160;ui.c'],['../ui_8h.html#a7b0fe86532accba15417fbbbf50ba74e',1,'ui_exit():&#160;ui.c']]],
+  ['ui_5fget_5fdisplay_5feta',['ui_get_display_eta',['../ui_8c.html#a1852b9093c04c0b8e80f76ab7978bba5',1,'ui_get_display_eta(u32 seconds):&#160;ui.c'],['../ui_8h.html#a1852b9093c04c0b8e80f76ab7978bba5',1,'ui_get_display_eta(u32 seconds):&#160;ui.c']]],
+  ['ui_5fget_5fdisplay_5fsize',['ui_get_display_size',['../ui_8c.html#ac5d0b480b44353a076a3fcc30961c6d4',1,'ui_get_display_size(u64 size):&#160;ui.c'],['../ui_8h.html#ac5d0b480b44353a076a3fcc30961c6d4',1,'ui_get_display_size(u64 size):&#160;ui.c']]],
+  ['ui_5fget_5fdisplay_5fsize_5funits',['ui_get_display_size_units',['../ui_8c.html#a592ceacd8fe2538d5eb02c02ee789e46',1,'ui_get_display_size_units(u64 size):&#160;ui.c'],['../ui_8h.html#a592ceacd8fe2538d5eb02c02ee789e46',1,'ui_get_display_size_units(u64 size):&#160;ui.c']]],
+  ['ui_5finit',['ui_init',['../ui_8c.html#aa6f50ea564e0ba7375ce590a5196f12f',1,'ui_init():&#160;ui.c'],['../ui_8h.html#aa6f50ea564e0ba7375ce590a5196f12f',1,'ui_init():&#160;ui.c']]],
+  ['ui_5fpop',['ui_pop',['../ui_8c.html#a2c23a42fd1d67a79484ad31500ae0bcb',1,'ui_pop():&#160;ui.c'],['../ui_8h.html#a2c23a42fd1d67a79484ad31500ae0bcb',1,'ui_pop():&#160;ui.c']]],
+  ['ui_5fpush',['ui_push',['../ui_8c.html#a292da96edaf45f903b3fd069c331b93c',1,'ui_push(ui_view *view):&#160;ui.c'],['../ui_8h.html#a292da96edaf45f903b3fd069c331b93c',1,'ui_push(ui_view *view):&#160;ui.c']]],
+  ['ui_5ftop',['ui_top',['../ui_8c.html#a91fb742b8b68be46d604dfb9553b24c2',1,'ui_top():&#160;ui.c'],['../ui_8h.html#a91fb742b8b68be46d604dfb9553b24c2',1,'ui_top():&#160;ui.c']]],
+  ['ui_5fupdate',['ui_update',['../ui_8c.html#aba196f9d73d759fdcc718b1668a0ae3a',1,'ui_update():&#160;ui.c'],['../ui_8h.html#aba196f9d73d759fdcc718b1668a0ae3a',1,'ui_update():&#160;ui.c']]],
+  ['ui_5fview',['ui_view',['../dataop_8h.html#a55f2710d20f5f703ffe2e4b12b27fac0',1,'ui_view():&#160;dataop.h'],['../ui_2error_8h.html#a55f2710d20f5f703ffe2e4b12b27fac0',1,'ui_view():&#160;error.h'],['../info_8h.html#a55f2710d20f5f703ffe2e4b12b27fac0',1,'ui_view():&#160;info.h'],['../kbd_8h.html#a55f2710d20f5f703ffe2e4b12b27fac0',1,'ui_view():&#160;kbd.h'],['../list_8h.html#a55f2710d20f5f703ffe2e4b12b27fac0',1,'ui_view():&#160;list.h'],['../prompt_8h.html#a55f2710d20f5f703ffe2e4b12b27fac0',1,'ui_view():&#160;prompt.h'],['../ui_8h.html#aa769ca1525188a0043f783f58c98cfb0',1,'ui_view():&#160;ui.h'],['../action_8h.html#a55f2710d20f5f703ffe2e4b12b27fac0',1,'ui_view():&#160;action.h'],['../uitask_8h.html#a55f2710d20f5f703ffe2e4b12b27fac0',1,'ui_view():&#160;uitask.h']]],
+  ['ui_5fview_5fs',['ui_view_s',['../structui__view__s.html',1,'']]],
+  ['uitask_2ec',['uitask.c',['../uitask_8c.html',1,'']]],
+  ['uitask_2eh',['uitask.h',['../uitask_8h.html',1,'']]],
+  ['unused',['unused',['../structdelete__tickets__data.html#ac88c0c55a2cd206cadf451bbc9ed88be',1,'delete_tickets_data']]],
+  ['update',['update',['../structinfo__data.html#ab1e9787a0733cfb899d08089e1104513',1,'info_data::update()'],['../structlist__data.html#a47dfbb231038b9b37863444e7d1a844f',1,'list_data::update()'],['../structui__view__s.html#a110dbc6fe42d7b4142b6e83c0e797509',1,'ui_view_s::update()']]],
+  ['update_2ec',['update.c',['../update_8c.html',1,'']]],
+  ['update_5fopen',['update_open',['../section_8h.html#a530b90ebc8774a70efb4b03f5a8ce802',1,'update_open():&#160;update.c'],['../update_8c.html#a530b90ebc8774a70efb4b03f5a8ce802',1,'update_open():&#160;update.c']]],
+  ['url',['url',['../namespacesetup.html#a3376e8b9735800b5b9e455914cee908d',1,'setup']]],
+  ['urls',['urls',['../structinstall__url__data.html#a9f31c6af1d5a024c15ebb54b1a5ee8b9',1,'install_url_data']]],
+  ['userdata',['userData',['../structhttp__curl__data.html#a1ee70628ce9240060b8b38bdba82ad87',1,'http_curl_data::userData()'],['../structinstall__url__data.html#ae2137d28bf8cfb7c012ed9b79d275477',1,'install_url_data::userData()'],['../structpopulate__ext__save__data__data__s.html#a1fb40c60aa87ea5287b67291ed5cdaeb',1,'populate_ext_save_data_data_s::userData()'],['../structpopulate__titles__data__s.html#a39bd5ad318dce23013bd4abbcb187650',1,'populate_titles_data_s::userData()']]]
+];

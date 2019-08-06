@@ -1,0 +1,14 @@
+digraph "source/fbi/action" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_0690d63da931225ca891c72312f79421 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="fbi" fontname="Helvetica", fontsize="10", URL="dir_0690d63da931225ca891c72312f79421.html"]
+  dir_694380f872ceaa3c95b94091678ed7e6 [shape=box, label="action", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_694380f872ceaa3c95b94091678ed7e6.html"];
+  }
+  dir_0d27ce74e9bd514c31e1d63efab6b388 [shape=box label="core" fillcolor="white" style="filled" color="red" URL="dir_0d27ce74e9bd514c31e1d63efab6b388.html"];
+  dir_84bf406a94597323932ead91ddc48809 [shape=box label="task" URL="dir_84bf406a94597323932ead91ddc48809.html"];
+  dir_84bf406a94597323932ead91ddc48809->dir_0d27ce74e9bd514c31e1d63efab6b388 [headlabel="7", labeldistance=1.5 headhref="dir_000010_000004.html"];
+  dir_694380f872ceaa3c95b94091678ed7e6->dir_0d27ce74e9bd514c31e1d63efab6b388 [headlabel="25", labeldistance=1.5 headhref="dir_000009_000004.html"];
+  dir_694380f872ceaa3c95b94091678ed7e6->dir_84bf406a94597323932ead91ddc48809 [headlabel="25", labeldistance=1.5 headhref="dir_000009_000010.html"];
+}

@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="httpc_context_s",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structhttpc__context__s.html",tooltip="Struct for holding httpc Context, buffer and zlib z_stream. "];
+}

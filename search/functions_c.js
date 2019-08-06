@@ -1,0 +1,13 @@
+var searchData=
+[
+  ['quirc_5fbegin',['quirc_begin',['../identify_8c.html#a457243b0f5e298ccf4e74a9f5d6968dd',1,'quirc_begin(struct quirc *q, int *w, int *h):&#160;identify.c'],['../quirc_8h.html#a457243b0f5e298ccf4e74a9f5d6968dd',1,'quirc_begin(struct quirc *q, int *w, int *h):&#160;identify.c']]],
+  ['quirc_5fcount',['quirc_count',['../quirc_8c.html#a514cbb5376ad15abd5453fcc76395b5d',1,'quirc_count(const struct quirc *q):&#160;quirc.c'],['../quirc_8h.html#a514cbb5376ad15abd5453fcc76395b5d',1,'quirc_count(const struct quirc *q):&#160;quirc.c']]],
+  ['quirc_5fdecode',['quirc_decode',['../decode_8c.html#a8a7081409a9d4ffc5c7495d34590b0da',1,'quirc_decode(const struct quirc_code *code, struct quirc_data *data):&#160;decode.c'],['../quirc_8h.html#a8a7081409a9d4ffc5c7495d34590b0da',1,'quirc_decode(const struct quirc_code *code, struct quirc_data *data):&#160;decode.c']]],
+  ['quirc_5fdestroy',['quirc_destroy',['../quirc_8c.html#a0c4f335de1d23659a7a1a19f43aebac6',1,'quirc_destroy(struct quirc *q):&#160;quirc.c'],['../quirc_8h.html#a0c4f335de1d23659a7a1a19f43aebac6',1,'quirc_destroy(struct quirc *q):&#160;quirc.c']]],
+  ['quirc_5fend',['quirc_end',['../identify_8c.html#aafc19a215df622a40afa7c73e6fca529',1,'quirc_end(struct quirc *q):&#160;identify.c'],['../quirc_8h.html#aafc19a215df622a40afa7c73e6fca529',1,'quirc_end(struct quirc *q):&#160;identify.c']]],
+  ['quirc_5fextract',['quirc_extract',['../identify_8c.html#a4bb37b375602ee381558e142d42fbafb',1,'quirc_extract(const struct quirc *q, int index, struct quirc_code *code):&#160;identify.c'],['../quirc_8h.html#a4bb37b375602ee381558e142d42fbafb',1,'quirc_extract(const struct quirc *q, int index, struct quirc_code *code):&#160;identify.c']]],
+  ['quirc_5fnew',['quirc_new',['../quirc_8c.html#af8bbdf9c26970c6b68f21ffd33f79fe3',1,'quirc_new(void):&#160;quirc.c'],['../quirc_8h.html#af8bbdf9c26970c6b68f21ffd33f79fe3',1,'quirc_new(void):&#160;quirc.c']]],
+  ['quirc_5fresize',['quirc_resize',['../quirc_8c.html#a1291b2ed7ffc8fd1180bb3254d328dd1',1,'quirc_resize(struct quirc *q, int w, int h):&#160;quirc.c'],['../quirc_8h.html#a1291b2ed7ffc8fd1180bb3254d328dd1',1,'quirc_resize(struct quirc *q, int w, int h):&#160;quirc.c']]],
+  ['quirc_5fstrerror',['quirc_strerror',['../quirc_8c.html#a277595fbdbcb4e5dbd1f1b9802885271',1,'quirc_strerror(quirc_decode_error_t err):&#160;quirc.c'],['../quirc_8h.html#a277595fbdbcb4e5dbd1f1b9802885271',1,'quirc_strerror(quirc_decode_error_t err):&#160;quirc.c']]],
+  ['quirc_5fversion',['quirc_version',['../quirc_8c.html#af30fc7bdf2c1ca9a91aa6be52ecffaf3',1,'quirc_version(void):&#160;quirc.c'],['../quirc_8h.html#af30fc7bdf2c1ca9a91aa6be52ecffaf3',1,'quirc_version(void):&#160;quirc.c']]]
+];
