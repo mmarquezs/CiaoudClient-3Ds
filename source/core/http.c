@@ -20,6 +20,12 @@
 #define HTTP_TIMEOUT_SEC 15
 #define HTTP_TIMEOUT_NS ((u64) HTTP_TIMEOUT_SEC * 1000000000)
 
+/**
+ * @brief      Struct for holding httpc Context, buffer and zlib z_stream
+ *
+ * @details    Struct for holding httpc Context, buffer and zlib z_stream
+ *
+ */
 struct httpc_context_s {
     httpcContext httpc;
 
@@ -328,6 +334,12 @@ static Result httpc_read(httpc_context context, u32* bytesRead, void* buffer, u3
 
 #define R_HTTP_TLS_VERIFY_FAILED 0xD8A0A03C
 
+/**
+ * @brief      Struct to store curl http curl data
+ *
+ * @details    Struct to store curl http curl data
+ *
+ */
 typedef struct {
     u32 bufferSize;
     void* userData;
@@ -340,6 +352,7 @@ typedef struct {
 
     Result res;
 } http_curl_data;
+
 /**
  * @brief      Function that writes the data from curl and executes a callback.
  *
@@ -543,6 +556,20 @@ typedef struct {
     size_t pos;
 } http_buffer_data;
 
+
+/**
+ * @brief      Copies downloaded data (userData) into buffer.
+ *
+ * @details    Given an userData pointer it copies it's buffer into the provided buffer.
+ *
+ * @param      userData - Download data
+ *
+ * @param      buffer - Buffer where to store the downloaded resource.
+ *
+ * @param      size - The size of the provided buffer.
+ *
+ * @return     Result - Result of the operation, in this case always 0.
+ */
 static Result http_download_buffer_callback(void* userData, void* buffer, size_t size) {
     http_buffer_data* data = (http_buffer_data*) userData;
 
@@ -560,7 +587,21 @@ static Result http_download_buffer_callback(void* userData, void* buffer, size_t
     return 0;
 }
 
-
+/**
+ * @brief      Downloads the provided url into the provided buffer.
+ *
+ * @details    Downloads the provided url into the provided buffer using the http_download_callback function and the http_download_buffer_callback as default callbadk.
+ *
+ * @param      url - Url of the resource to download.
+ *
+ * @param      downloadedSize - Pointer to an u32 to save the size of the downloaed resource.
+ *
+ * @param      buf - Buffer where to store the downloaded resource.
+ *
+ * @param      size - The size of the provided buffer.
+ *
+ * @return     Result - result of the call to http_downlo_callback.
+ */
 Result http_download_buffer(const char* url, u32* downloadedSize, void* buf, size_t size) {
     http_buffer_data data = {buf, size, 0};
     Result res = http_download_callback(url, size, &data, http_download_buffer_callback, NULL, NULL);
@@ -572,18 +613,34 @@ Result http_download_buffer(const char* url, u32* downloadedSize, void* buf, siz
     return res;
 }
 
+
+/**
+ * @brief      Downloads the provided url and converts it into a json_t struct.
+ *
+ * @details    Downloads the provided url using the http_download_callback function and then parses the content as json.
+ *
+ * @param      url - Url of the resource to download.
+ *
+ * @param      json - Pointer to a json_t.
+ *
+ * @param      maxSize - The maximum size of the download, used to create a temporary buffer.
+ *
+ * @return     Result - result of the call to http_downlo_callback and loading of the json.
+ */
 Result http_download_json(const char* url, json_t** json, size_t maxSize) {
     if(url == NULL || json == NULL) {
         return R_APP_INVALID_ARGUMENT;
     }
 
     Result res = 0;
-
+    // Creates a temporal buffer.
     char* text = (char*) calloc(sizeof(char), maxSize);
     if(text != NULL) {
         u32 textSize = 0;
+        // Downloading the url into the temporal buffer.
         if(R_SUCCEEDED(res = http_download_buffer(url, &textSize, text, maxSize))) {
             json_error_t error;
+            // Parsing the json received.
             json_t* parsed = json_loads(text, 0, &error);
             if(parsed != NULL) {
                 *json = parsed;
@@ -594,6 +651,7 @@ Result http_download_json(const char* url, json_t** json, size_t maxSize) {
 
         free(text);
     } else {
+      // Allocation failed
         res = R_APP_OUT_OF_MEMORY;
     }
 
@@ -615,6 +673,15 @@ static Result FSUSER_AddSeed(u64 titleId, const void* seed) {
     return ret;
 }
 
+/**
+ * @brief      Downloads & Install the seed for the provided titleId.
+ *
+ * @details    Downloads and installs the seed for the provided titleId from the Nintendo cdn. The seed is used to decrypt data from the game.
+ *
+ * @param      titleId - titleId of the game in u64.
+ *
+ * @return     Result - Result of the download,failed, bad_data, out of memory,etc....
+ */
 Result http_download_seed(u64 titleId) {
     char pathBuf[64];
     snprintf(pathBuf, 64, "/fbi/seed/%016llX.dat", titleId);
